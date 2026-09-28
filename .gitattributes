@@ -1,0 +1,15 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force shell scripts to always use LF line endings
+*.sh text eol=lf
+
+# Force other common script/config files used in Docker to LF
+Dockerfile text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+
+# Windows launchers must keep CRLF, or cmd.exe mis-parses labels and goto
+*.bat text eol=crlf
+LISEZ-MOI_LANCEMENT.txt text eol=crlf

@@ -1,0 +1,52 @@
+# Configuration du scénario de démonstration du moteur de scoring (§4.5).
+#
+# Le scan de démonstration du chapitre 6 portait sur du code Python analysé par
+# Bandit : tous ses résultats étaient d'exposition inconnue, de confiance haute
+# et sans corrélation, de sorte que chaque score se réduisait à la base de
+# sévérité. Les trois termes qui distinguent la formule d'une simple table de
+# correspondance n'y étaient donc jamais exercés.
+#
+# Ce scénario les exerce. Il est CONSTRUIT — les jeux d'essai ont été écrits
+# pour l'occasion — mais réaliste : une application conteneurisée dont le
+# serveur web est à la fois vulnérable et exposé, et un paquet signalé à la
+# fois par l'analyse de dépendances et par le scan d'image.
+#
+# Aucun binaire n'est invoqué : les greffons lisent les fichiers ci-dessous, et
+# --network-input court-circuite l'exécution du scanner réseau.
+
+llm:
+  enabled: false                    # le scénario est déterministe de bout en bout
+
+network:
+  scanner_binary: nmap
+  allow_cidr: false                 # rejet des plages CIDR par défaut (CEL-2)
+  # Les services inventoriés sont en façade : c'est ce qui déclenche le
+  # boost d'exposition. Seuls les résultats réseau portent une exposition ;
+  # un paquet vulnérable ne peut en bénéficier qu'indirectement, par la
+  # corrélation de règle 1.
+  default_exposure: external
+  output_format: xml
+
+# Coefficients du moteur de scoring — valeurs par défaut, rappelées ici pour
+# que le scénario soit lisible sans se reporter au code.
+external_exposure_boost: 15.0
+low_confidence_penalty: 10.0
+
+fail_on_critical: false
+
+plugins:
+  sast:
+    enabled: true
+    input_file: "examples/demo_scoring/sast.json"
+  deps:
+    enabled: true
+    input_file: "examples/demo_scoring/deps.json"
+  secrets:
+    enabled: true
+    input_file: "examples/demo_scoring/secrets.json"
+  container:
+    enabled: true
+    input_file: "examples/demo_scoring/container.json"
+  network:
+    enabled: true
+    # pas d'input_file : fourni par --network-input

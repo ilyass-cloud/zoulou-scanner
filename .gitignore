@@ -1,0 +1,33 @@
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# ── Node ────────────────────────────────────────────────────
+node_modules/
+web/client/dist/
+
+# ── IDE / OS ────────────────────────────────────────────────
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Fichiers de verrouillage Office (Word/PowerPoint ouverts)
+~$*
+
+# ── Données d'exécution (régénérées à chaque scan) ──────────
+scans/
+uploads/
+out/
+out_test/
+out_video/
+
+# Plans de session (outil), pas du contenu projet
+plans/
+

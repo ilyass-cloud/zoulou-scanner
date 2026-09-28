@@ -1,0 +1,31 @@
+{
+  "$comment": "Produit par web/client/test/bench.js. Les décomptes sont exacts et ne dépendent pas de la machine ; les durées sont des observations sur celle nommée ci-dessous et ne valent que comme ordre de grandeur. Ni l'une ni l'autre ne mesure la réconciliation React ou le DOM.",
+  "lines": 5000,
+  "batch_size": 50,
+  "cap": 2000,
+  "environment": {
+    "runtime": "node v22.22.2",
+    "platform": "linux x64",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz"
+  },
+  "closed_form": {
+    "formula": "n(n+1)/2",
+    "element_operations": 12502500,
+    "note": "Décompte fermé de la somme quadratique : il découle de la forme du code et se démontre, il ne se mesure pas."
+  },
+  "before": {
+    "array_copies": 12502500,
+    "lines_classified": 12502500,
+    "lines_retained": 5000,
+    "median_ms": 1374.1,
+    "best_ms": 1372.1
+  },
+  "after": {
+    "array_copies": 164000,
+    "lines_classified": 161000,
+    "lines_retained": 2000,
+    "median_ms": 17.5,
+    "best_ms": 17.2
+  },
+  "speedup_median": 78.5
+}

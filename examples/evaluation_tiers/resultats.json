@@ -1,0 +1,643 @@
+{
+ "v2_dvpwa": {
+  "cible": "dvpwa",
+  "outils": {
+   "semgrep": {
+    "code_retour": 0,
+    "duree_s": 42.9
+   },
+   "bandit": {
+    "code_retour": 1,
+    "duree_s": 0.2
+   },
+   "pip-audit": {
+    "code_retour": 1,
+    "duree_s": 16.2
+   },
+   "gitleaks": {
+    "code_retour": 0,
+    "duree_s": 0.6
+   },
+   "trufflehog": {
+    "code_retour": 0,
+    "duree_s": 2.8
+   },
+   "trivy": {
+    "code_retour": 0,
+    "duree_s": 0.2
+   }
+  },
+  "resultats_apres_dedup_par_outil": {
+   "trivy": 55,
+   "bandit": 2,
+   "Semgrep OSS": 16,
+   "pip-audit": 55
+  },
+  "total_apres_dedup": 128,
+  "par_famille": {
+   "DEPS": 110,
+   "SAST": 18
+  },
+  "par_severite": {
+   "CRITICAL": 2,
+   "HIGH": 6,
+   "MEDIUM": 48,
+   "LOW": 17,
+   "UNKNOWN": 55
+  },
+  "termes_du_score": {
+   "corrobores": 108,
+   "confiance_basse": 1
+  },
+  "scores_differant_de_la_base": 1,
+  "kendall_tau_b_severite_vs_score": 0.9956,
+  "sensibilite": {
+   "low_confidence_penalty=5": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 1
+   },
+   "low_confidence_penalty=15": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 1
+   },
+   "external_exposure_boost=10": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=20": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   }
+  },
+  "top10": [
+   {
+    "rang": 1,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "pyyaml@3.13 – CVE-2020-14343",
+    "lieu": "requirements.txt:pyyaml"
+   },
+   {
+    "rang": 2,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "pyyaml@3.13 – CVE-2017-18342",
+    "lieu": "requirements.txt:pyyaml"
+   },
+   {
+    "rang": 3,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "aiohttp@3.5.3 – CVE-2025-69223",
+    "lieu": "requirements.txt:aiohttp"
+   },
+   {
+    "rang": 4,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "aiohttp@3.5.3 – CVE-2024-30251",
+    "lieu": "requirements.txt:aiohttp"
+   },
+   {
+    "rang": 5,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "jinja2@2.10 – CVE-2019-10906",
+    "lieu": "requirements.txt:jinja2"
+   },
+   {
+    "rang": 6,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "aiohttp@3.5.3 – CVE-2026-69244",
+    "lieu": "requirements.txt:aiohttp"
+   },
+   {
+    "rang": 7,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "bandit",
+    "titre": "B324 – hashlib",
+    "lieu": "dvpwa/sqli/dao/user.py:41"
+   },
+   {
+    "rang": 8,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "aiohttp@3.5.3 – CVE-2024-23334",
+    "lieu": "requirements.txt:aiohttp"
+   },
+   {
+    "rang": 9,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "aiohttp@3.5.3 – CVE-2026-34525",
+    "lieu": "requirements.txt:aiohttp"
+   },
+   {
+    "rang": 10,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "formatted-sql-query",
+    "lieu": "dvpwa/sqli/dao/student.py:45"
+   }
+  ]
+ },
+ "v2_pygoat": {
+  "cible": "pygoat",
+  "outils": {
+   "semgrep": {
+    "code_retour": 0,
+    "duree_s": 21.4
+   },
+   "bandit": {
+    "code_retour": 1,
+    "duree_s": 0.5
+   },
+   "pip-audit": {
+    "code_retour": 1,
+    "duree_s": 13.5
+   },
+   "gitleaks": {
+    "code_retour": 1,
+    "duree_s": 0.6
+   },
+   "trufflehog": {
+    "code_retour": 0,
+    "duree_s": 3.0
+   },
+   "trivy": {
+    "code_retour": 0,
+    "duree_s": 0.2
+   }
+  },
+  "resultats_apres_dedup_par_outil": {
+   "trivy": 166,
+   "bandit": 65,
+   "gitleaks": 10,
+   "Semgrep OSS": 139,
+   "pip-audit": 129
+  },
+  "total_apres_dedup": 509,
+  "par_famille": {
+   "DEPS": 293,
+   "SAST": 204,
+   "SECRETS": 12
+  },
+  "par_severite": {
+   "CRITICAL": 9,
+   "HIGH": 71,
+   "MEDIUM": 232,
+   "LOW": 68,
+   "UNKNOWN": 129
+  },
+  "termes_du_score": {
+   "corrobores": 271,
+   "confiance_basse": 5
+  },
+  "scores_differant_de_la_base": 5,
+  "kendall_tau_b_severite_vs_score": 0.9937,
+  "sensibilite": {
+   "low_confidence_penalty=5": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 5
+   },
+   "low_confidence_penalty=15": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 5
+   },
+   "external_exposure_boost=10": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=20": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   }
+  },
+  "top10": [
+   {
+    "rang": 1,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "Django@4.2 – CVE-2025-64459",
+    "lieu": "requirements.txt:Django"
+   },
+   {
+    "rang": 2,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "Django@4.2 – CVE-2024-42005",
+    "lieu": "requirements.txt:Django"
+   },
+   {
+    "rang": 3,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "django@3.2.18 – CVE-2023-31047",
+    "lieu": "dockerized_labs/sensitive_data_exposure/requirements.txt:django"
+   },
+   {
+    "rang": 4,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "PyYAML@5.1 – CVE-2020-1747",
+    "lieu": "requirements.txt:PyYAML"
+   },
+   {
+    "rang": 5,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "PyYAML@5.1 – CVE-2019-20477",
+    "lieu": "requirements.txt:PyYAML"
+   },
+   {
+    "rang": 6,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "Django@4.2 – CVE-2023-31047",
+    "lieu": "requirements.txt:Django"
+   },
+   {
+    "rang": 7,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "PyYAML@5.1 – CVE-2020-14343",
+    "lieu": "requirements.txt:PyYAML"
+   },
+   {
+    "rang": 8,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "django@3.2.18 – CVE-2025-64459",
+    "lieu": "dockerized_labs/sensitive_data_exposure/requirements.txt:django"
+   },
+   {
+    "rang": 9,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "Pillow@9.4.0 – CVE-2023-50447",
+    "lieu": "requirements.txt:Pillow"
+   },
+   {
+    "rang": 10,
+    "score": 60.0,
+    "severite": "HIGH",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "Django@4.2 – CVE-2026-25673",
+    "lieu": "requirements.txt:Django"
+   }
+  ]
+ },
+ "v2_juice": {
+  "cible": "juice-shop",
+  "outils": {
+   "semgrep": {
+    "code_retour": 0,
+    "duree_s": 70.7
+   },
+   "npm-audit": {
+    "code_retour": 1,
+    "duree_s": 35.0
+   },
+   "gitleaks": {
+    "code_retour": 1,
+    "duree_s": 2.8
+   },
+   "trufflehog": {
+    "code_retour": 0,
+    "duree_s": 14.4
+   },
+   "trivy": {
+    "code_retour": 0,
+    "duree_s": 1.0
+   }
+  },
+  "resultats_apres_dedup_par_outil": {
+   "npm-audit": 64,
+   "trivy": 86,
+   "gitleaks": 68,
+   "trufflehog": 6,
+   "Semgrep OSS": 91
+  },
+  "total_apres_dedup": 315,
+  "par_famille": {
+   "DEPS": 145,
+   "SECRETS": 79,
+   "SAST": 91
+  },
+  "par_severite": {
+   "CRITICAL": 15,
+   "HIGH": 145,
+   "MEDIUM": 148,
+   "LOW": 7
+  },
+  "termes_du_score": {
+   "corrobores": 8
+  },
+  "scores_differant_de_la_base": 0,
+  "kendall_tau_b_severite_vs_score": 1.0,
+  "sensibilite": {
+   "low_confidence_penalty=5": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "low_confidence_penalty=15": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=10": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=20": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   }
+  },
+  "top10": [
+   {
+    "rang": 1,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "npm-audit",
+    "titre": "crypto-js – GHSA-rg76-677x-56q9",
+    "lieu": "package-lock.json:crypto-js"
+   },
+   {
+    "rang": 2,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "npm-audit",
+    "titre": "jsonwebtoken – GHSA-c7hr-j4mj-j2w6",
+    "lieu": "package-lock.json:jsonwebtoken"
+   },
+   {
+    "rang": 3,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "crypto-js@3.3.0 – CVE-2026-71851",
+    "lieu": "package-lock.json:crypto-js"
+   },
+   {
+    "rang": 4,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "npm-audit",
+    "titre": "tar – GHSA-23hp-3jrh-7fpw",
+    "lieu": "package-lock.json:tar"
+   },
+   {
+    "rang": 5,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "crypto-js@3.3.0 – CVE-2023-46233",
+    "lieu": "package-lock.json:crypto-js"
+   },
+   {
+    "rang": 6,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "marsdb@0.6.11 – GHSA-5mrr-rgp6-x4gr",
+    "lieu": "package-lock.json:marsdb"
+   },
+   {
+    "rang": 7,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "npm-audit",
+    "titre": "crypto-js – GHSA-xwcq-pm8m-c4vf",
+    "lieu": "package-lock.json:crypto-js"
+   },
+   {
+    "rang": 8,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "tar@6.2.1 – CVE-2026-59873",
+    "lieu": "package-lock.json:tar"
+   },
+   {
+    "rang": 9,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "lodash@2.4.2 – CVE-2019-10744",
+    "lieu": "package-lock.json:lodash"
+   },
+   {
+    "rang": 10,
+    "score": 80.0,
+    "severite": "CRITICAL",
+    "confiance": "HIGH",
+    "outil": "trivy",
+    "titre": "jsonwebtoken@0.4.0 – CVE-2015-9235",
+    "lieu": "package-lock.json:jsonwebtoken"
+   }
+  ]
+ },
+ "v2_zoulou_orch": {
+  "cible": "orchestrator",
+  "outils": {
+   "semgrep": {
+    "code_retour": 0,
+    "duree_s": 20.1
+   },
+   "bandit": {
+    "code_retour": 1,
+    "duree_s": 0.5
+   }
+  },
+  "resultats_apres_dedup_par_outil": {
+   "Semgrep OSS": 6,
+   "bandit": 10
+  },
+  "total_apres_dedup": 16,
+  "par_famille": {
+   "SAST": 16
+  },
+  "par_severite": {
+   "MEDIUM": 8,
+   "LOW": 8
+  },
+  "termes_du_score": {},
+  "scores_differant_de_la_base": 0,
+  "kendall_tau_b_severite_vs_score": 1.0,
+  "sensibilite": {
+   "low_confidence_penalty=5": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "low_confidence_penalty=15": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=10": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   },
+   "external_exposure_boost=20": {
+    "jaccard_top20": 1.0,
+    "kendall_tau_b": 1.0,
+    "scores_modifies": 0
+   }
+  },
+  "top10": [
+   {
+    "rang": 1,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "use-defused-xml",
+    "lieu": "orchestrator/plugins/network.py:27"
+   },
+   {
+    "rang": 2,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "dangerous-subprocess-use-audit",
+    "lieu": "orchestrator/plugins/live_plugin.py:183"
+   },
+   {
+    "rang": 3,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "HIGH",
+    "outil": "bandit",
+    "titre": "B310 – blacklist",
+    "lieu": "orchestrator/llm_client.py:126"
+   },
+   {
+    "rang": 4,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "dangerous-subprocess-use-audit",
+    "lieu": "orchestrator/plugins/network.py:451"
+   },
+   {
+    "rang": 5,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "HIGH",
+    "outil": "bandit",
+    "titre": "B314 – blacklist",
+    "lieu": "orchestrator/plugins/network.py:256"
+   },
+   {
+    "rang": 6,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "use-defused-xml-parse",
+    "lieu": "orchestrator/plugins/network.py:256"
+   },
+   {
+    "rang": 7,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "dynamic-urllib-use-detected",
+    "lieu": "orchestrator/llm_client.py:126"
+   },
+   {
+    "rang": 8,
+    "score": 40.0,
+    "severite": "MEDIUM",
+    "confiance": "MEDIUM",
+    "outil": "Semgrep OSS",
+    "titre": "dangerous-subprocess-use-audit",
+    "lieu": "orchestrator/plugins/live_plugin.py:279"
+   },
+   {
+    "rang": 9,
+    "score": 20.0,
+    "severite": "LOW",
+    "confiance": "HIGH",
+    "outil": "bandit",
+    "titre": "B110 – try_except_pass",
+    "lieu": "orchestrator/env_detect.py:252"
+   },
+   {
+    "rang": 10,
+    "score": 20.0,
+    "severite": "LOW",
+    "confiance": "HIGH",
+    "outil": "bandit",
+    "titre": "B405 – blacklist",
+    "lieu": "orchestrator/plugins/network.py:27"
+   }
+  ]
+ }
+}

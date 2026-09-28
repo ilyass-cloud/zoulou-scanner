@@ -1,0 +1,7 @@
+{
+  "$comment": "Relevé par scripts/count_tests.sh. Ne pas éditer à la main : la CI vérifie qu’il correspond au dépôt.",
+  "python": 360,
+  "node": 64,
+  "react": 44,
+  "total": 468
+}

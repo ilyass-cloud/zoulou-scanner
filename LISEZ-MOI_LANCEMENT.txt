@@ -1,0 +1,24 @@
+﻿ZOULOU SCANNER — LANCEMENT SUR WINDOWS
+======================================
+
+Ce qu'il faut (une seule fois)
+  - Docker Desktop : https://www.docker.com/products/docker-desktop/
+  - Facultatif, pour les explications par IA : LM Studio, avec un modèle
+    chargé et le serveur local démarré (port 1234).
+
+Lancer
+  1. Démarrer Docker Desktop et attendre « Engine running ».
+  2. Double-cliquer sur LANCER_ZOULOU.bat.
+     La toute première fois, la préparation prend 10 à 20 minutes
+     (téléchargement et installation des scanners). Ensuite, quelques secondes.
+  3. Le navigateur s'ouvre sur http://localhost:5000
+     Connexion : admin / changeme
+
+Faire un scan
+  New Scan → « Upload a project » → choisir le dossier du projet →
+  cocher les familles d'outils (SAST, Dependencies, Secrets…) →
+  activer « LLM Analysis » seulement si LM Studio tourne → Start Scan.
+  Le suivi s'affiche en direct, puis « View Results ».
+
+Arrêter
+  Double-cliquer sur ARRETER_ZOULOU.bat (les résultats sont conservés).

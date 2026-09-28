@@ -1,0 +1,60 @@
+{
+ "v2_dvpwa": {
+  "avant": {
+   "semgrep": 19,
+   "bandit": 2,
+   "pip-audit": 0,
+   "gitleaks": 0,
+   "trufflehog": 0,
+   "trivy": 0
+  },
+  "avant_apres_dedup": 18,
+  "apres": {
+   "semgrep": 19,
+   "bandit": 2,
+   "pip-audit": 109,
+   "gitleaks": 0,
+   "trufflehog": 0,
+   "trivy": 55
+  },
+  "apres_apres_dedup": 128
+ },
+ "v2_pygoat": {
+  "avant": {
+   "semgrep": 139,
+   "bandit": 65,
+   "pip-audit": 0,
+   "gitleaks": 10,
+   "trufflehog": 0,
+   "trivy": 0
+  },
+  "avant_apres_dedup": 205,
+  "apres": {
+   "semgrep": 139,
+   "bandit": 65,
+   "pip-audit": 234,
+   "gitleaks": 10,
+   "trufflehog": 0,
+   "trivy": 166
+  },
+  "apres_apres_dedup": 509
+ },
+ "v2_juice": {
+  "avant": {
+   "semgrep": 92,
+   "npm-audit": 0,
+   "gitleaks": 69,
+   "trufflehog": 0,
+   "trivy": 0
+  },
+  "avant_apres_dedup": 92,
+  "apres": {
+   "semgrep": 92,
+   "npm-audit": 64,
+   "gitleaks": 69,
+   "trufflehog": 6,
+   "trivy": 86
+  },
+  "apres_apres_dedup": 315
+ }
+}

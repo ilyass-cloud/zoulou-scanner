@@ -1,0 +1,6 @@
+# Web/brain container – Python deps for the orchestrator brain ONLY.
+# The HTTP/SSE/uploads/DB layer is now the Node server (web/server); Flask,
+# markdown2 and psycopg are no longer needed here. The brain (plan / postprocess
+# / env-detect / auto-plan, invoked as a CLI by the Node server) needs just:
+pydantic>=2.0,<3.0
+pyyaml>=6.0,<7.0

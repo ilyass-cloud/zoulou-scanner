@@ -1,0 +1,16 @@
+{
+ "_comment": "Construit d'après le schéma JSON documenté de Grype, et non capturé : la base de vulnérabilités de Grype n'était pas téléchargeable dans l'environnement où les autres jeux ont été relevés.",
+ "matches": [
+  {
+   "vulnerability": {"id": "GHSA-v6wp-4m6f-gcjg", "severity": "Medium", "description": "aiohttp open redirect", "urls": ["https://github.com/advisories/GHSA-v6wp-4m6f-gcjg"], "fix": {"versions": ["3.7.4"], "state": "fixed"}},
+   "relatedVulnerabilities": [{"id": "CVE-2021-21330"}],
+   "artifact": {"name": "aiohttp", "version": "3.5.3", "type": "python", "locations": [{"path": "/requirements.txt"}]}
+  },
+  {
+   "vulnerability": {"id": "CVE-2023-4911", "severity": "High", "description": "glibc buffer overflow", "urls": [], "fix": {"versions": [], "state": "not-fixed"}},
+   "relatedVulnerabilities": [],
+   "artifact": {"name": "libc6", "version": "2.36-9", "type": "deb", "locations": [{"path": "/var/lib/dpkg/status"}]}
+  }
+ ],
+ "source": {"type": "image", "target": {"userInput": "python:3.12-slim"}}
+}

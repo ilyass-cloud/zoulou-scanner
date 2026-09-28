@@ -1,0 +1,26 @@
+[
+  {
+    "package": "cryptography",
+    "version": "41.0.3",
+    "cve": "CVE-2023-49083",
+    "severity": "MEDIUM",
+    "confidence": "LOW",
+    "description": "NULL dereference when loading a PKCS7 certificate bundle.",
+    "manifest": "requirements.txt",
+    "ecosystem": "pypi",
+    "evidence": "cryptography==41.0.3 declared in requirements.txt",
+    "references": ["https://nvd.nist.gov/vuln/detail/CVE-2023-49083"]
+  },
+  {
+    "package": "requests",
+    "version": "2.25.0",
+    "cve": "CVE-2023-32681",
+    "severity": "MEDIUM",
+    "confidence": "HIGH",
+    "description": "Proxy-Authorization header forwarded on cross-host redirect.",
+    "manifest": "requirements.txt",
+    "ecosystem": "pypi",
+    "evidence": "requests==2.25.0 declared in requirements.txt",
+    "references": ["https://nvd.nist.gov/vuln/detail/CVE-2023-32681"]
+  }
+]

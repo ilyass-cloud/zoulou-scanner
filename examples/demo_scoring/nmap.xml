@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Inventaire réseau du scénario de démonstration du §4.5.
+     Les deux hôtes sont ceux de examples/allowlist.txt : le filtrage par
+     appartenance d'adresse écarterait tout autre, et des adresses littérales
+     évitent toute résolution DNS, donc toute dépendance au réseau. -->
+<nmaprun scanner="nmap" args="nmap -sV --open -T2 10.0.0.1 10.0.0.2" version="7.94">
+  <host starttime="1700000001" endtime="1700000012">
+    <status state="up" reason="echo-reply"/>
+    <address addr="10.0.0.1" addrtype="ipv4"/>
+    <hostnames><hostname name="app.internal" type="PTR"/></hostnames>
+    <ports>
+      <port protocol="tcp" portid="22">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="ssh" product="OpenSSH" version="8.9p1" method="probed" conf="10"/>
+      </port>
+      <port protocol="tcp" portid="80">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="http" product="nginx" version="1.24.0" method="probed" conf="10"/>
+      </port>
+      <port protocol="tcp" portid="443">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="https" product="nginx" version="1.24.0" tunnel="ssl" method="probed" conf="10"/>
+      </port>
+    </ports>
+  </host>
+  <host starttime="1700000013" endtime="1700000020">
+    <status state="up" reason="echo-reply"/>
+    <address addr="10.0.0.2" addrtype="ipv4"/>
+    <ports>
+      <port protocol="tcp" portid="3306">
+        <state state="open" reason="syn-ack" reason_ttl="64"/>
+        <service name="mysql" product="MySQL" version="8.0.33" method="probed" conf="10"/>
+      </port>
+    </ports>
+  </host>
+  <runstats><finished time="1700000020" elapsed="19.0"/><hosts up="2" down="0" total="2"/></runstats>
+</nmaprun>

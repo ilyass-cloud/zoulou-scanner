@@ -1,0 +1,29 @@
+[
+  {
+    "image": "myapp:latest",
+    "package": "openssl",
+    "version": "1.1.1t",
+    "cve": "CVE-2023-0286",
+    "severity": "HIGH",
+    "confidence": "HIGH",
+    "description": "X.400 address type confusion in X.509 GeneralName. Allows remote attackers to cause DoS or potentially read memory.",
+    "layer": "sha256:abc123def456",
+    "evidence": "openssl 1.1.1t found in layer sha256:abc123def456",
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2023-0286",
+      "https://www.openssl.org/news/secadv/20230207.txt"
+    ]
+  },
+  {
+    "image": "myapp:latest",
+    "package": "libexpat1",
+    "version": "2.4.7",
+    "cve": "CVE-2022-43680",
+    "severity": "HIGH",
+    "confidence": "HIGH",
+    "description": "Use-after-free in the doContent function in xmlparse.c.",
+    "layer": "sha256:abc123def456",
+    "evidence": "libexpat1 2.4.7 found in layer sha256:abc123def456"
+  }
+]
+

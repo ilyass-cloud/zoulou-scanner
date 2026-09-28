@@ -1,0 +1,7 @@
+{
+ "_comment": "Construit d'après le schéma JSON documenté de Safety (clé vulnerabilities) : Safety 3 exige un compte, et sa base libre n'était pas joignable depuis l'environnement de relevé.",
+ "report_meta": {"scan_target": "files"},
+ "vulnerabilities": [
+  {"vulnerability_id": "39659", "package_name": "aiohttp", "analyzed_version": "3.5.3", "vulnerable_spec": "<3.7.4", "CVE": "CVE-2021-21330", "advisory": "Aiohttp 3.7.4 includes a fix for an open redirect.", "severity": {"cvssv3": {"base_severity": "MEDIUM", "base_score": 6.1}}, "more_info_url": "https://data.safetycli.com/v/39659/f17"}
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "dependencies": [
+  {
+   "name": "aiohttp-jinja2",
+   "version": "1.1.0",
+   "vulns": []
+  },
+  {
+   "name": "aiohttp",
+   "version": "3.5.3",
+   "vulns": [
+    {
+     "id": "PYSEC-2021-76",
+     "fix_versions": [
+      "3.7.4"
+     ],
+     "aliases": [
+      "GHSA-v6wp-4m6f-gcjg",
+      "CVE-2021-21330"
+     ],
+     "description": "aiohttp is an asynchronous HTTP client/server framework for asyncio and Python. In aiohttp before version 3.7.4 there is an open redirect vulnerability. A maliciously crafted link to an aiohttp-based "
+    },
+    {
+     "id": "PYSEC-2021-76",
+     "fix_versions": [
+      "3.7.4"
+     ],
+     "aliases": [
+      "GHSA-v6wp-4m6f-gcjg",
+      "CVE-2021-21330"
+     ],
+     "description": "### Impact  Open redirect vulnerability \u2014 a maliciously crafted link to an aiohttp-based web-server could redirect the browser to a different website.  It is caused by a bug in the `aiohttp.web_middle"
+    }
+   ]
+  }
+ ],
+ "fixes": []
+}

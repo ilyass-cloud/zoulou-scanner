@@ -1,0 +1,20 @@
+# Configuration de démonstration (scan du paquet orchestrator/ avec Bandit).
+# LLM local servi par LM Studio (modèle unique demandé).
+llm:
+  base_url: http://localhost:1234
+  model: qwen/qwen3.6-35b-a3b
+  enabled: true
+  temperature: 0.2
+  timeout_seconds: 600
+  max_tokens: 4096
+  top_findings_count: 3
+  analysis_workers: 1
+
+network:
+  default_exposure: internal
+
+external_exposure_boost: 15.0
+low_confidence_penalty: 10.0
+fail_on_critical: false
+
+tools_registry_path: tools_registry.yaml

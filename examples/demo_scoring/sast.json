@@ -1,0 +1,12 @@
+[
+  {
+    "rule_id": "python.lang.security.insecure-hash",
+    "file": "app/legacy/checksum.py",
+    "line": 12,
+    "severity": "LOW",
+    "confidence": "HIGH",
+    "description": "MD5 used for a non-cryptographic checksum; flagged for review.",
+    "cwe": "CWE-328",
+    "evidence": "digest = hashlib.md5(payload).hexdigest()"
+  }
+]

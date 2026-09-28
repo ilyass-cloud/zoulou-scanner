@@ -1,0 +1,42 @@
+# Version control
+.git
+.gitignore
+
+# Python caches
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.mypy_cache
+
+# Virtual environments
+.venv
+venv
+env
+
+# IDE
+.idea
+.vscode
+*.iml
+
+# Build artifacts
+out/
+scans/
+uploads/
+dist/
+build/
+*.egg-info
+
+# Node (installed in-image via npm ci; lockfiles ARE copied)
+node_modules
+**/node_modules
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+

@@ -1,0 +1,26 @@
+[
+  {
+    "image": "myapp:2.4",
+    "package": "nginx",
+    "version": "1.24.0",
+    "cve": "CVE-2024-7347",
+    "severity": "HIGH",
+    "confidence": "HIGH",
+    "description": "nginx mp4 module out-of-bounds read: a crafted MP4 file can crash the worker process or disclose memory.",
+    "layer": "sha256:9f1e2c4b8a7d6503",
+    "evidence": "nginx 1.24.0 installed in layer sha256:9f1e2c4b8a7d6503",
+    "references": ["https://nvd.nist.gov/vuln/detail/CVE-2024-7347"]
+  },
+  {
+    "image": "myapp:2.4",
+    "package": "cryptography",
+    "version": "41.0.3",
+    "cve": "CVE-2023-49083",
+    "severity": "MEDIUM",
+    "confidence": "HIGH",
+    "description": "NULL dereference when loading a PKCS7 certificate bundle.",
+    "layer": "sha256:9f1e2c4b8a7d6503",
+    "evidence": "cryptography 41.0.3 (site-packages) in layer sha256:9f1e2c4b8a7d6503",
+    "references": ["https://nvd.nist.gov/vuln/detail/CVE-2023-49083"]
+  }
+]

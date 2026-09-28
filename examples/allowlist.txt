@@ -1,0 +1,16 @@
+# Network scan allowlist
+# ⚠️  Only add hosts you are AUTHORIZED to scan.
+# One IP address or hostname per line.
+# CIDR ranges are rejected by default (set network.allow_cidr=true in config to enable).
+# Entries are passed to the scanner as arguments, so every line must be an IP,
+# a CIDR range, or a hostname. Anything starting with '-' is rejected: a line
+# like '--script=vuln' would otherwise turn this passive inventory scan into an
+# active exploitation scan. One bad entry rejects the whole file.
+# Hostnames are resolved before scanning and the scanner receives the resolved
+# address, so the host that was authorized is the host that gets scanned.
+# Address ranges must be written as CIDR, not as '10.0.0.1-20'.
+
+# Internal lab hosts (example only – replace with your authorized targets)
+10.0.0.1
+10.0.0.2
+

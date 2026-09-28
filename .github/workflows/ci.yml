@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+# A new push to the same branch makes an in-flight run obsolete.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python (orchestrator)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Only what the orchestrator imports plus the test runner. requirements.txt
+      # also pins the scanners themselves (semgrep, bandit, trivy…), which are
+      # large and are not needed to exercise the core: the plugin tests use
+      # deliberately absent binaries.
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip pytest pydantic pyyaml
+
+      - name: Run tests
+        run: python -m pytest tests/ -v
+
+  server:
+    name: Node (backend)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/server
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/server/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+  client:
+    name: Node (frontend build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/client
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/client/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Covers the pure logic extracted from the components (log batching and
+      # retention); the build catches import and syntax breakage in the JSX.
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  counts:
+    name: Test count is up to date
+    runs-on: ubuntu-latest
+    # The number of test cases is recorded in docs/test_counts.json rather than
+    # copied by hand into documents. This job fails if the record no longer
+    # matches the repository. Ce job échoue si le relevé ne correspond
+    # plus au dépôt — c'est-à-dire si quelqu'un a ajouté ou retiré un test sans
+    # relancer scripts/count_tests.sh.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip pytest pydantic pyyaml
+          npm ci --prefix web/server
+          npm ci --prefix web/client
+
+      - name: Le relevé correspond-il au dépôt ?
+        run: ./scripts/count_tests.sh --check

@@ -1,0 +1,53 @@
+# Security Orchestrator – example configuration
+# Copy and adapt this file for your environment.
+
+llm:
+  base_url: "http://localhost:1234"
+  model: "local-model"          # LM Studio model name
+  timeout_seconds: 120
+  max_tokens: 2048
+  temperature: 0.2
+  enabled: true                 # set to false to skip LLM analysis
+
+network:
+  scanner_binary: "nmap"
+  # Conservative inventory flags – NO exploit, NO brute-force
+  default_flags:
+    - "-sV"
+    - "--open"
+    - "-T2"
+    - "--version-intensity"
+    - "2"
+  allow_cidr: false             # set to true to permit CIDR ranges in allowlist
+  default_exposure: "internal"  # internal | external | unknown
+  output_format: "xml"
+
+# Scoring modifiers
+external_exposure_boost: 15.0
+low_confidence_penalty: 10.0
+
+# Exit with code 2 if any CRITICAL finding is found (useful for CI)
+fail_on_critical: false
+
+# Per-plugin configuration
+plugins:
+  sast:
+    enabled: true
+    input_file: "examples/sample_sast.sarif.json"
+
+  deps:
+    enabled: true
+    input_file: "examples/sample_deps.json"
+
+  secrets:
+    enabled: true
+    input_file: "examples/sample_secrets.json"
+
+  container:
+    enabled: true
+    input_file: "examples/sample_container.json"
+
+  network:
+    enabled: true
+    # No input_file here – controlled by --network-input CLI flag
+

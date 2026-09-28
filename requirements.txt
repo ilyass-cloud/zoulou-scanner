@@ -1,0 +1,12 @@
+# Security Orchestrator – Python dependencies
+flask>=3.0,<4.0
+pydantic>=2.0,<3.0
+pyyaml>=6.0,<7.0
+markdown2>=2.4,<3.0
+
+# Scanner tools (pip-installable)
+semgrep>=1.0
+bandit>=1.7
+pip-audit>=2.6
+safety>=2.3
+

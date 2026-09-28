@@ -1,0 +1,59 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "semgrep",
+          "version": "1.45.0",
+          "rules": [
+            {
+              "id": "python.django.security.injection.sql.sql-injection-using-db-cursor-execute",
+              "name": "SQLInjectionViaCursorExecute",
+              "shortDescription": { "text": "SQL Injection via cursor.execute()" },
+              "fullDescription": { "text": "User-controlled data flows into a raw SQL query without parameterisation." },
+              "properties": { "tags": ["CWE-89", "OWASP-A03"] }
+            },
+            {
+              "id": "python.lang.security.audit.hardcoded-password",
+              "name": "HardcodedPassword",
+              "shortDescription": { "text": "Hardcoded password detected" },
+              "fullDescription": { "text": "A password literal is hardcoded in source code." },
+              "properties": { "tags": ["CWE-259"] }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "python.django.security.injection.sql.sql-injection-using-db-cursor-execute",
+          "level": "error",
+          "message": { "text": "User input `request.GET['id']` flows into cursor.execute() without parameterisation." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "app/views.py" },
+                "region": { "startLine": 87, "endLine": 89 }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "python.lang.security.audit.hardcoded-password",
+          "level": "warning",
+          "message": { "text": "Hardcoded password 'admin123' found in configuration." },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": { "uri": "app/config.py" },
+                "region": { "startLine": 14 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,43 @@
+[
+  {
+    "package": "requests",
+    "version": "2.25.0",
+    "cve": "CVE-2023-32681",
+    "severity": "MEDIUM",
+    "confidence": "HIGH",
+    "description": "Requests forwards proxy-authorization headers to destination servers when following redirects to a different host.",
+    "manifest": "requirements.txt",
+    "ecosystem": "pypi",
+    "evidence": "requests==2.25.0 found in requirements.txt",
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2023-32681",
+      "https://github.com/psf/requests/security/advisories/GHSA-j8r2-6x86-q33q"
+    ]
+  },
+  {
+    "package": "pillow",
+    "version": "9.0.0",
+    "cve": "CVE-2023-44271",
+    "severity": "HIGH",
+    "confidence": "HIGH",
+    "description": "Pillow before 10.0.0 allows DoS via crafted image files in certain PIL.ImageFont operations.",
+    "manifest": "requirements.txt",
+    "ecosystem": "pypi",
+    "evidence": "Pillow==9.0.0 found in requirements.txt",
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2023-44271"
+    ]
+  },
+  {
+    "package": "cryptography",
+    "version": "38.0.0",
+    "cve": "CVE-2023-49083",
+    "severity": "LOW",
+    "confidence": "MEDIUM",
+    "description": "NULL pointer dereference when loading PKCS12 files in certain configurations.",
+    "manifest": "requirements.txt",
+    "ecosystem": "pypi",
+    "evidence": "cryptography==38.0.0 found in requirements.txt"
+  }
+]
+

@@ -1,0 +1,125 @@
+tools:
+- name: semgrep
+  label: Semgrep (SAST)
+  category: sast
+  command: semgrep --sarif -o {output_file} {repo_path}
+  output_format: sarif
+  output_file_flag: ''
+  install_check: semgrep --version
+  description: Fast, rule-based static analysis. Supports Python, JS/TS, Go, Java,
+    Ruby, and more.
+  enabled: true
+  timeout_seconds: 600
+  env: {}
+  extra_args: []
+- name: bandit
+  label: Bandit (Python SAST)
+  category: sast
+  command: bandit -r {repo_path} -f json -o {output_file}
+  output_format: json
+  output_file_flag: ''
+  install_check: bandit --version
+  description: Python-specific security linter. Finds common security issues in Python
+    code.
+  enabled: true
+  timeout_seconds: 300
+  env: {}
+  extra_args: []
+- name: pip-audit
+  label: pip-audit (Python Deps)
+  category: deps
+  command: pip-audit -r {repo_path}/requirements.txt --format json -o {output_file}
+  output_format: json
+  output_file_flag: ''
+  install_check: pip-audit --version
+  description: Audits Python dependencies for known vulnerabilities via PyPI/OSV.
+  enabled: true
+  timeout_seconds: 120
+  env: {}
+  extra_args: []
+- name: npm-audit
+  label: npm audit (Node.js Deps)
+  category: deps
+  command: npm audit --json
+  output_format: json
+  output_file_flag: ''
+  install_check: npm --version
+  description: Audits Node.js dependencies for known vulnerabilities.
+  enabled: true
+  timeout_seconds: 120
+  env: {}
+  extra_args: []
+- name: safety
+  label: Safety (Python Deps)
+  category: deps
+  command: safety check -r {repo_path}/requirements.txt --json > {output_file}
+  output_format: json
+  output_file_flag: ''
+  install_check: safety --version
+  description: Checks Python dependencies against the Safety DB for known vulnerabilities.
+  enabled: true
+  timeout_seconds: 120
+  env: {}
+  extra_args: []
+- name: gitleaks
+  label: Gitleaks (Secrets)
+  category: secrets
+  command: gitleaks detect --source {repo_path} --report-format json --report-path
+    {output_file} --no-git
+  output_format: json
+  output_file_flag: ''
+  install_check: gitleaks version
+  description: Detects hardcoded secrets, API keys, and credentials in source code.
+  enabled: true
+  timeout_seconds: 300
+  env: {}
+  extra_args: []
+- name: trufflehog
+  label: TruffleHog (Secrets)
+  category: secrets
+  command: trufflehog filesystem {repo_path} --json > {output_file}
+  output_format: json
+  output_file_flag: ''
+  install_check: trufflehog --version
+  description: Finds leaked credentials by scanning filesystem with high-signal detectors.
+  enabled: true
+  timeout_seconds: 300
+  env: {}
+  extra_args: []
+- name: trivy
+  label: Trivy (Container/IaC)
+  category: container
+  command: trivy fs --format json --output {output_file} {repo_path}
+  output_format: json
+  output_file_flag: ''
+  install_check: trivy --version
+  description: Comprehensive scanner for container images, filesystems, and IaC misconfigurations.
+  enabled: true
+  timeout_seconds: 600
+  env: {}
+  extra_args: []
+- name: grype
+  label: Grype (Container)
+  category: container
+  command: grype dir:{repo_path} -o json > {output_file}
+  output_format: json
+  output_file_flag: ''
+  install_check: grype version
+  description: Vulnerability scanner for container images and filesystems.
+  enabled: true
+  timeout_seconds: 300
+  env: {}
+  extra_args: []
+- name: nmap
+  label: Nmap (Network)
+  category: network
+  command: nmap -sV --open -T2 -oX {output_file} {targets}
+  output_format: xml
+  output_file_flag: ''
+  install_check: nmap --version
+  description: Network discovery and service version detection. Requires explicit
+    allowlist.
+  enabled: true
+  timeout_seconds: 300
+  env: {}
+  extra_args: []

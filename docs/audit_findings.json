@@ -1,0 +1,207 @@
+{
+  "$comment": [
+    "Vecteurs CVSS v3.1 des dix-sept constats de l'audit (chapitre 7, tableau 7.1).",
+    "Le mémoire annonce une cotation « calculée et non estimée ». Un score n'est",
+    "calculé que si le vecteur dont il découle est écrit et que l'arithmétique peut",
+    "être rejouée ; ni le rapport d'audit ni le mémoire ne portaient un seul vecteur.",
+    "Ce fichier les donne, scripts/cvss31.py refait le calcul, et",
+    "tests/test_cvss31.py vérifie ligne à ligne que chaque vecteur reproduit le",
+    "score publié — après avoir validé le calculateur sur des vecteurs de référence",
+    "publiés, qui ne sont pas de ce projet."
+  ],
+  "cvss_version": "3.1",
+  "metric_group": "base",
+  "rated_commit": "4c93fbc",
+  "rated_state": "Dépôt à l'état pré-audit. Coter le code corrigé n'aurait pas de sens : les vulnérabilités n'y sont plus. Le commit portant les correctifs est cité séparément dans la déclaration de disponibilité du code.",
+  "rating_basis": "global",
+  "rating_basis_note": "Chaque constat est coté dans l'état réel du système, et non isolé des autres. La distinction n'est pas théorique : A-10 atteint 10,0 parce que PR:N y est vrai, ce qui suppose l'API non authentifiée — soit A-01. Isolé, A-10 exigerait PR:L ou PR:H et tomberait plus bas. Le champ depends_on signale les cotations où ce couplage joue.",
+  "findings": [
+    {
+      "id": "A-01",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Surface d'API entièrement non authentifiée",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "base_score": 9.8,
+      "severity": "CRITICAL",
+      "rationale": "Aucune garde ne protégeait /api : les primitives d'authentification existaient (bcrypt, table des comptes, routes /auth) mais rien ne les appelait. Toute route est donc atteignable sans identifiant depuis le réseau (AV:N, PR:N, UI:N), et parmi elles /api/tools/add écrit une commande que /api/scan exécute — d'où C:H/I:H/A:H.",
+      "depends_on": []
+    },
+    {
+      "id": "A-02",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Commande arbitraire inscrite au registre d'outils",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "base_score": 9.8,
+      "severity": "CRITICAL",
+      "rationale": "Le registre d'outils est un patron de commande que l'orchestrateur exécute. Y écrire par l'API revient à exécuter du code sur l'hôte de l'exécuteur, sans condition préalable autre que l'accès au réseau.",
+      "depends_on": ["A-01"]
+    },
+    {
+      "id": "A-03",
+      "component": "Cœur Python",
+      "kind": "sécurité",
+      "title": "Injection de commande par ordre de substitution",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "base_score": 9.8,
+      "severity": "CRITICAL",
+      "rationale": "live_plugin.py substituait les variables dans le patron avant de le découper en arguments, puis passait au shell. Une valeur contenant un métacaractère devenait une commande. Le chemin du dépôt à analyser provient de l'interface web, donc d'une source distante (AV:N).",
+      "depends_on": []
+    },
+    {
+      "id": "A-04",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Montage d'un chemin hôte arbitraire dans le conteneur",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+      "base_score": 8.6,
+      "severity": "HIGH",
+      "rationale": "Le chemin fourni à /api/scan était monté tel quel dans le conteneur d'exécution. Le composant vulnérable est l'API, le composant impacté est le système de fichiers de l'hôte : S:C. Le montage est en lecture seule dans le code coté (`${repo_path}:${CONTAINER_TARGET}:ro`), d'où C:H sans I ni A — c'est la lecture du montage, et non le mode du montage, qui fixe I:N.",
+      "depends_on": ["A-01"]
+    },
+    {
+      "id": "A-05",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Traversée de chemin à la réception de fichiers",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "base_score": 9.1,
+      "severity": "CRITICAL",
+      "rationale": "Le nom reçu n'était pas cloisonné sous la racine prévue : une séquence remontante écrit hors de celle-ci (I:H) et, les mêmes chemins étant relus par le navigateur de répertoires, lit hors de celle-ci (C:H). A:N : rien n'indique qu'un écrasement mette le service à l'arrêt.",
+      "depends_on": ["A-01"]
+    },
+    {
+      "id": "A-06",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Injection de script stockée dans le rapport",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N",
+      "base_score": 8.2,
+      "severity": "HIGH",
+      "rationale": "Un champ de résultat non échappé est rendu dans le rapport. Le script s'exécute dans le navigateur de l'analyste, composant distinct de celui qui porte le défaut (S:C), lorsque celui-ci ouvre le rapport (UI:R). Avec la session de l'analyste il lit tout ce que l'API expose (C:H) et en altère une partie (I:L).",
+      "depends_on": []
+    },
+    {
+      "id": "A-07",
+      "component": "API Node",
+      "kind": "sécurité",
+      "title": "Secret de session par défaut connu publiquement",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "base_score": 7.4,
+      "severity": "HIGH",
+      "rationale": "Le secret de signature des sessions avait une valeur de repli inscrite dans le code : qui la connaît forge une session valide. AC:H, et non AC:L, parce que l'attaque suppose un déploiement où l'authentification est effectivement active — elle ne l'est que si une base est configurée (§5.7.1) —, condition que l'attaquant ne maîtrise pas. Sous AC:L le même vecteur donnerait 9,8 ; l'écart tient tout entier à cette hypothèse, et c'est le point le plus discutable de la ligne.",
+      "depends_on": []
+    },
+    {
+      "id": "A-08",
+      "component": "Cœur Python",
+      "kind": "défaut",
+      "title": "Scanner absent rapporté comme analyse propre",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+      "base_score": 7.5,
+      "severity": "HIGH",
+      "rationale": "is_installed() ne pouvait jamais renvoyer False : un scanner absent produisait un rapport vide, indiscernable d'un dépôt sain. Le composant impacté est le rapport lui-même, dont l'intégrité est entièrement compromise (I:H) — un rapport qui déclare propre ce qu'il n'a pas regardé.",
+      "depends_on": []
+    },
+    {
+      "id": "A-09",
+      "component": "Déploiement",
+      "kind": "défaut",
+      "title": "Racine de travail montée mais non exportée",
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+      "base_score": 3.3,
+      "severity": "LOW",
+      "rationale": "Défaut de configuration du déploiement : l'incohérence entre montage et variable d'environnement fait échouer des exécutions. Elle n'est atteignable que localement et par un utilisateur déjà autorisé à lancer un scan (AV:L, PR:L), et ne dégrade que la disponibilité, partiellement (A:L).",
+      "depends_on": []
+    },
+    {
+      "id": "A-10",
+      "component": "Greffon réseau",
+      "kind": "sécurité",
+      "title": "La liste d'autorisation accepte des drapeaux de scanner",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
+      "base_score": 10.0,
+      "severity": "CRITICAL",
+      "rationale": "parse_allowlist acceptait une entrée commençant par un tiret, par exemple --script=vuln : le contenu de la liste d'autorisation devient un drapeau passé au scanner, et le profil passif conçu au §3.5 se change en scan d'exploitation contre des tiers. S:C parce que les systèmes atteints ne sont pas celui qui porte le défaut. PR:N n'est vrai que parce que A-01 laissait l'API non authentifiée : isolé de A-01, ce constat exigerait un privilège et tomberait sous 10,0. C'est la seule cotation de la matrice qui dépende d'une autre à ce point.",
+      "depends_on": ["A-01"]
+    },
+    {
+      "id": "A-11",
+      "component": "Greffon réseau",
+      "kind": "sécurité",
+      "title": "Autorisation appliquée aux résultats, non au scan",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+      "base_score": 7.5,
+      "severity": "HIGH",
+      "rationale": "Le filtre s'appliquait à la sortie du scanner : au moment où un hôte est écarté, les paquets lui ont déjà été envoyés, et un nom réassocié entre la vérification et le scan atteint une cible non autorisée. Le composant impacté retenu est le contrôle d'autorisation lui-même, dont l'intégrité est entièrement défaite (S:U, I:H). Une lecture plus stricte placerait le tiers scanné en composant impacté (S:C) ; elle donnerait 5,8 et non 7,5 — l'écart est assumé ici, il tient au choix du composant impacté et non à l'arithmétique.",
+      "depends_on": []
+    },
+    {
+      "id": "A-12",
+      "component": "Greffon réseau",
+      "kind": "défaut",
+      "title": "Port malformé échappant au traitement d'erreur",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+      "base_score": 5.3,
+      "severity": "MEDIUM",
+      "rationale": "Un attribut de port non numérique dans la sortie du scanner n'était pas intercepté. L'effet est une perte partielle d'intégrité des résultats (I:L), sans divulgation ni arrêt.",
+      "depends_on": []
+    },
+    {
+      "id": "A-13",
+      "component": "Cœur Python",
+      "kind": "défaut",
+      "title": "Un artefact malformé annule tous les résultats",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:L",
+      "base_score": 8.2,
+      "severity": "HIGH",
+      "rationale": "Une seule sortie de scanner illisible interrompait la normalisation de l'ensemble : le rapport sortait vide, sans que rien ne distingue « rien trouvé » de « rien lu ». L'artefact provient du dépôt analysé, donc d'une entrée distante et contrôlable (AV:N). I:H pour la même raison qu'en A-08, A:L pour le scan rendu inexploitable.",
+      "depends_on": []
+    },
+    {
+      "id": "A-14",
+      "component": "API Node",
+      "kind": "défaut",
+      "title": "Rejet non traité interrompant le service",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "base_score": 7.5,
+      "severity": "HIGH",
+      "rationale": "Une promesse rejetée sans gestionnaire termine le processus Node : une requête suffit à mettre le service à l'arrêt, sans divulgation ni altération. C'est le vecteur canonique d'un déni de service distant non authentifié.",
+      "depends_on": []
+    },
+    {
+      "id": "A-15",
+      "component": "Couche LLM",
+      "kind": "défaut",
+      "title": "Règle d'ancrage non appliquée",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+      "base_score": 7.5,
+      "severity": "HIGH",
+      "rationale": "La règle d'ancrage n'existait que comme consigne d'invite : un résultat dépourvu de preuve était tout de même soumis au modèle, qui produisait une remédiation inventée. Le composant impacté est l'analyse livrée à l'analyste, dont l'intégrité est compromise — c'est le constat qui met en cause la garantie centrale du mémoire.",
+      "depends_on": []
+    },
+    {
+      "id": "A-16",
+      "component": "Interface",
+      "kind": "performance",
+      "title": "Rendu quadratique du journal temps réel",
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+      "base_score": 3.3,
+      "severity": "LOW",
+      "rationale": "L'accumulation du journal recopiait le tableau entier à chaque ligne, sans plafond : le coût croît avec le carré du nombre de lignes et l'onglet finit par ne plus répondre. L'effet se produit dans le navigateur de l'utilisateur qui a lancé le scan (AV:L, PR:L) et ne dégrade que la disponibilité de l'affichage (A:L), non celle du service.",
+      "depends_on": []
+    },
+    {
+      "id": "A-17",
+      "component": "Interface",
+      "kind": "conformité",
+      "title": "Manquements WCAG 2.2 AA",
+      "vector": null,
+      "base_score": null,
+      "severity": null,
+      "rationale": "Délibérément non coté. Le référentiel CVSS modélise l'impact d'une attaque ; un défaut d'accessibilité n'en est pas une et recevrait un score nul, ce qui travestirait aussi bien le référentiel que le constat. La gravité relève ici d'un autre ordre — une non-conformité de niveau A à WCAG 2.2 —, et lui donner un chiffre CVSS reviendrait à la faire disparaître du classement.",
+      "depends_on": []
+    }
+  ]
+}

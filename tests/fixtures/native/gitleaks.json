@@ -1,0 +1,42 @@
+[
+ {
+  "RuleID": "jwt",
+  "Description": "Uncovered a JSON Web Token, which may lead to unauthorized access to web applications and sensitive user data.",
+  "StartLine": 4,
+  "EndLine": 4,
+  "StartColumn": 117,
+  "EndColumn": 254,
+  "Match": "FAKEsecretvalue0000000000000\"",
+  "Secret": "FAKEsecretvalue0000000000000",
+  "File": "pygoat/introduction/static/js/a7.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 5.3732586,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "/data/workspace/pygoat/introduction/static/js/a7.js:jwt:4"
+ },
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 7,
+  "EndLine": 7,
+  "StartColumn": 26,
+  "EndColumn": 113,
+  "Match": "csrfmiddlewaretoken\", \"FAKEsecretvalue1000000000000\"",
+  "Secret": "FAKEsecretvalue1000000000000",
+  "File": "pygoat/introduction/static/js/a7.js",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 5.245865,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "/data/workspace/pygoat/introduction/static/js/a7.js:generic-api-key:7"
+ }
+]

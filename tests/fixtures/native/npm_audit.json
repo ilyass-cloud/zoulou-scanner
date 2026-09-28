@@ -1,0 +1,91 @@
+{
+ "auditReportVersion": 2,
+ "vulnerabilities": {
+  "@cyclonedx/cyclonedx-npm": {
+   "name": "@cyclonedx/cyclonedx-npm",
+   "severity": "high",
+   "isDirect": true,
+   "via": [
+    {
+     "source": 1121296,
+     "name": "@cyclonedx/cyclonedx-npm",
+     "dependency": "@cyclonedx/cyclonedx-npm",
+     "title": "@cyclonedx/cyclonedx-npm: Shell Injection via Unsanitized --workspace Argument",
+     "url": "https://github.com/advisories/GHSA-v75r-vx73-82pj",
+     "severity": "high",
+     "cwe": [
+      "CWE-78"
+     ],
+     "cvss": {
+      "score": 0,
+      "vectorString": null
+     },
+     "range": ">=2.1.0 <5.0.0"
+    },
+    {
+     "source": 1224698,
+     "name": "@cyclonedx/cyclonedx-npm",
+     "dependency": "@cyclonedx/cyclonedx-npm",
+     "title": "@cyclonedx/cyclonedx-npm: Shell Injection via Unsanitized --workspace Argument on Windows",
+     "url": "https://github.com/advisories/GHSA-q69g-4hcv-6jg4",
+     "severity": "high",
+     "cwe": [
+      "CWE-78"
+     ],
+     "cvss": {
+      "score": 0,
+      "vectorString": null
+     },
+     "range": "<6.0.0"
+    }
+   ],
+   "effects": [],
+   "range": "<=5.0.0",
+   "nodes": [
+    "node_modules/@cyclonedx/cyclonedx-npm"
+   ],
+   "fixAvailable": {
+    "name": "@cyclonedx/cyclonedx-npm",
+    "version": "2.0.0"
+   }
+  },
+  "cacache": {
+   "name": "cacache",
+   "severity": "high",
+   "isDirect": false,
+   "via": [
+    "tar"
+   ],
+   "effects": [
+    "make-fetch-happen"
+   ],
+   "range": "14.0.0 - 18.0.4",
+   "nodes": [
+    "node_modules/sqlite3/node_modules/cacache"
+   ],
+   "fixAvailable": {
+    "name": "sqlite3",
+    "version": "6.0.1",
+    "isSemVerMajor": true
+   }
+  }
+ },
+ "metadata": {
+  "vulnerabilities": {
+   "info": 0,
+   "low": 3,
+   "moderate": 14,
+   "high": 19,
+   "critical": 7,
+   "total": 43
+  },
+  "dependencies": {
+   "prod": 628,
+   "dev": 650,
+   "optional": 142,
+   "peer": 0,
+   "peerOptional": 0,
+   "total": 1339
+  }
+ }
+}

@@ -1,0 +1,443 @@
+{
+  "run_id": "4decd3c0",
+  "generated_at": "2026-09-15T15:16:42.019344+00:00",
+  "repo_path": "/home/user/zoulou_scanner",
+  "config_path": "examples/demo_scoring/config.yaml",
+  "errors": [],
+  "summary": {
+    "total_findings": 10,
+    "by_severity": {
+      "HIGH": 1,
+      "MEDIUM": 4,
+      "INFO": 4,
+      "LOW": 1
+    },
+    "by_source": {
+      "CONTAINER": 2,
+      "DEPS": 2,
+      "SECRETS": 1,
+      "NETWORK": 4,
+      "SAST": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "2690823947ba176c",
+      "source": "CONTAINER",
+      "tool": "container",
+      "tool_version": null,
+      "title": "nginx@1.24.0 in myapp:2.4 \u2013 CVE-2024-7347",
+      "description": "nginx mp4 module out-of-bounds read: a crafted MP4 file can crash the worker process or disclose memory.",
+      "location": {
+        "kind": "container",
+        "image_ref": "myapp:2.4",
+        "layer_digest": "sha256:9f1e2c4b8a7d6503",
+        "package_name": "nginx",
+        "package_version": "1.24.0"
+      },
+      "cve": [
+        "CVE-2024-7347"
+      ],
+      "cwe": [],
+      "severity_raw": "HIGH",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "nginx 1.24.0 installed in layer sha256:9f1e2c4b8a7d6503",
+      "exposure": "unknown",
+      "risk_score": 70.0,
+      "remediation": null,
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-7347"
+      ],
+      "related_ids": [
+        "2c6cb54ca87fa376",
+        "874034f39c5e6450"
+      ],
+      "risk_related_ids": [
+        "2c6cb54ca87fa376",
+        "874034f39c5e6450"
+      ],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "fa3377b95d66ca11",
+      "source": "DEPS",
+      "tool": "deps",
+      "tool_version": null,
+      "title": "cryptography@41.0.3 \u2013 CVE-2023-49083",
+      "description": "NULL dereference when loading a PKCS7 certificate bundle.",
+      "location": {
+        "kind": "deps",
+        "manifest_path": "requirements.txt",
+        "package_name": "cryptography",
+        "package_version": "41.0.3",
+        "ecosystem": "pypi"
+      },
+      "cve": [
+        "CVE-2023-49083"
+      ],
+      "cwe": [],
+      "severity_raw": "MEDIUM",
+      "confidence_raw": "LOW",
+      "confidence_effective": "MEDIUM",
+      "evidence": "cryptography==41.0.3 declared in requirements.txt",
+      "exposure": "unknown",
+      "risk_score": 40.0,
+      "remediation": null,
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-49083"
+      ],
+      "related_ids": [
+        "cbae9a434b783edf"
+      ],
+      "risk_related_ids": [],
+      "corroborating_ids": [
+        "cbae9a434b783edf"
+      ],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "1a88b81aa91b3a40",
+      "source": "DEPS",
+      "tool": "deps",
+      "tool_version": null,
+      "title": "requests@2.25.0 \u2013 CVE-2023-32681",
+      "description": "Proxy-Authorization header forwarded on cross-host redirect.",
+      "location": {
+        "kind": "deps",
+        "manifest_path": "requirements.txt",
+        "package_name": "requests",
+        "package_version": "2.25.0",
+        "ecosystem": "pypi"
+      },
+      "cve": [
+        "CVE-2023-32681"
+      ],
+      "cwe": [],
+      "severity_raw": "MEDIUM",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "requests==2.25.0 declared in requirements.txt",
+      "exposure": "unknown",
+      "risk_score": 40.0,
+      "remediation": null,
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-32681"
+      ],
+      "related_ids": [],
+      "risk_related_ids": [],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "cbae9a434b783edf",
+      "source": "CONTAINER",
+      "tool": "container",
+      "tool_version": null,
+      "title": "cryptography@41.0.3 in myapp:2.4 \u2013 CVE-2023-49083",
+      "description": "NULL dereference when loading a PKCS7 certificate bundle.",
+      "location": {
+        "kind": "container",
+        "image_ref": "myapp:2.4",
+        "layer_digest": "sha256:9f1e2c4b8a7d6503",
+        "package_name": "cryptography",
+        "package_version": "41.0.3"
+      },
+      "cve": [
+        "CVE-2023-49083"
+      ],
+      "cwe": [],
+      "severity_raw": "MEDIUM",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "cryptography 41.0.3 (site-packages) in layer sha256:9f1e2c4b8a7d6503",
+      "exposure": "unknown",
+      "risk_score": 40.0,
+      "remediation": null,
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-49083"
+      ],
+      "related_ids": [
+        "fa3377b95d66ca11"
+      ],
+      "risk_related_ids": [],
+      "corroborating_ids": [
+        "fa3377b95d66ca11"
+      ],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "6641de3761e9bf9f",
+      "source": "SECRETS",
+      "tool": "secrets",
+      "tool_version": null,
+      "title": "Generic API key pattern detected in a configuration template",
+      "description": "Generic API key pattern detected in a configuration template",
+      "location": {
+        "kind": "code",
+        "file_path": "config/settings.example.yaml",
+        "start_line": 31,
+        "end_line": null,
+        "snippet": null
+      },
+      "cve": [],
+      "cwe": [],
+      "severity_raw": "MEDIUM",
+      "confidence_raw": "LOW",
+      "confidence_effective": "LOW",
+      "evidence": "api_key: \"sk_live_[REDACTED]\"",
+      "exposure": "unknown",
+      "risk_score": 30.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [],
+      "risk_related_ids": [],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "874034f39c5e6450",
+      "source": "NETWORK",
+      "tool": "network",
+      "tool_version": null,
+      "title": "Open port 80/tcp on 10.0.0.1 (http/nginx)",
+      "description": "Open port detected: 80/tcp running http/nginx on 10.0.0.1",
+      "location": {
+        "kind": "network",
+        "host": "10.0.0.1",
+        "port": 80,
+        "protocol": "tcp",
+        "service": "http",
+        "product": "nginx",
+        "product_version": "1.24.0"
+      },
+      "cve": [],
+      "cwe": [],
+      "severity_raw": "INFO",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "10.0.0.1:80/tcp http nginx 1.24.0",
+      "exposure": "external",
+      "risk_score": 25.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [
+        "2690823947ba176c"
+      ],
+      "risk_related_ids": [
+        "2690823947ba176c"
+      ],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "2c6cb54ca87fa376",
+      "source": "NETWORK",
+      "tool": "network",
+      "tool_version": null,
+      "title": "Open port 443/tcp on 10.0.0.1 (https/nginx)",
+      "description": "Open port detected: 443/tcp running https/nginx on 10.0.0.1",
+      "location": {
+        "kind": "network",
+        "host": "10.0.0.1",
+        "port": 443,
+        "protocol": "tcp",
+        "service": "https",
+        "product": "nginx",
+        "product_version": "1.24.0"
+      },
+      "cve": [],
+      "cwe": [],
+      "severity_raw": "INFO",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "10.0.0.1:443/tcp https nginx 1.24.0",
+      "exposure": "external",
+      "risk_score": 25.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [
+        "2690823947ba176c"
+      ],
+      "risk_related_ids": [
+        "2690823947ba176c"
+      ],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "0093e42971bbe019",
+      "source": "SAST",
+      "tool": "sast",
+      "tool_version": null,
+      "title": "python.lang.security.insecure-hash \u2013 MD5 used for a non-cryptographic checksum; flagged for review.",
+      "description": "MD5 used for a non-cryptographic checksum; flagged for review.",
+      "location": {
+        "kind": "code",
+        "file_path": "app/legacy/checksum.py",
+        "start_line": 12,
+        "end_line": null,
+        "snippet": null
+      },
+      "cve": [],
+      "cwe": [
+        "CWE-328"
+      ],
+      "severity_raw": "LOW",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "digest = hashlib.md5(payload).hexdigest()",
+      "exposure": "unknown",
+      "risk_score": 20.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [],
+      "risk_related_ids": [],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "5edfc1803534d1b9",
+      "source": "NETWORK",
+      "tool": "network",
+      "tool_version": null,
+      "title": "Open port 22/tcp on 10.0.0.1 (ssh/OpenSSH)",
+      "description": "Open port detected: 22/tcp running ssh/OpenSSH on 10.0.0.1",
+      "location": {
+        "kind": "network",
+        "host": "10.0.0.1",
+        "port": 22,
+        "protocol": "tcp",
+        "service": "ssh",
+        "product": "OpenSSH",
+        "product_version": "8.9p1"
+      },
+      "cve": [],
+      "cwe": [],
+      "severity_raw": "INFO",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "10.0.0.1:22/tcp ssh OpenSSH 8.9p1",
+      "exposure": "external",
+      "risk_score": 20.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [],
+      "risk_related_ids": [],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    },
+    {
+      "id": "b75c72284e7b1b1e",
+      "source": "NETWORK",
+      "tool": "network",
+      "tool_version": null,
+      "title": "Open port 3306/tcp on 10.0.0.2 (mysql/MySQL)",
+      "description": "Open port detected: 3306/tcp running mysql/MySQL on 10.0.0.2",
+      "location": {
+        "kind": "network",
+        "host": "10.0.0.2",
+        "port": 3306,
+        "protocol": "tcp",
+        "service": "mysql",
+        "product": "MySQL",
+        "product_version": "8.0.33"
+      },
+      "cve": [],
+      "cwe": [],
+      "severity_raw": "INFO",
+      "confidence_raw": "HIGH",
+      "confidence_effective": "HIGH",
+      "evidence": "10.0.0.2:3306/tcp mysql MySQL 8.0.33",
+      "exposure": "external",
+      "risk_score": 20.0,
+      "remediation": null,
+      "references": [],
+      "related_ids": [],
+      "risk_related_ids": [],
+      "corroborating_ids": [],
+      "llm_remediation": null,
+      "llm_justification": null
+    }
+  ],
+  "executive_summary": null,
+  "top_findings_analysis": null,
+  "artifacts": [
+    {
+      "plugin_name": "sast",
+      "scan_type": "SAST",
+      "tool": "sast",
+      "tool_version": null,
+      "raw_file_path": "/home/user/zoulou_scanner/out_demo_scoring/raw/sast/sast.json",
+      "stdout": "[\n  {\n    \"rule_id\": \"python.lang.security.insecure-hash\",\n    \"file\": \"app/legacy/checksum.py\",\n    \"line\": 12,\n    \"severity\": \"LOW\",\n    \"confidence\": \"HIGH\",\n    \"description\": \"MD5 used for a non-cryptographic checksum; flagged for review.\",\n    \"cwe\": \"CWE-328\",\n    \"evidence\": \"digest = hashlib.md5(payload).hexdigest()\"\n  }\n]",
+      "stderr": "",
+      "exit_code": 0,
+      "duration_seconds": 0.001,
+      "extra": {}
+    },
+    {
+      "plugin_name": "deps",
+      "scan_type": "DEPS",
+      "tool": "deps",
+      "tool_version": null,
+      "raw_file_path": "/home/user/zoulou_scanner/out_demo_scoring/raw/deps/deps.json",
+      "stdout": "[\n  {\n    \"package\": \"cryptography\",\n    \"version\": \"41.0.3\",\n    \"cve\": \"CVE-2023-49083\",\n    \"severity\": \"MEDIUM\",\n    \"confidence\": \"LOW\",\n    \"description\": \"NULL dereference when loading a PKCS7 certificate bundle.\",\n    \"manifest\": \"requirements.txt\",\n    \"ecosystem\": \"pypi\",\n    \"evidence\": \"cryptography==41.0.3 declared in requirements.txt\",\n    \"references\": [\n      \"https://nvd.nist.gov/vuln/detail/CVE-2023-49083\"\n    ]\n  },\n  {\n    \"package\": \"requests\",\n    \"version\": \"2.25.0\",\n    \"cve\": \"CVE-2023-32681\",\n    \"severity\": \"MEDIUM\",\n    \"confidence\": \"HIGH\",\n    \"description\": \"Proxy-Authorization header forwarded on cross-host redirect.\",\n    \"manifest\": \"requirements.txt\",\n    \"ecosystem\": \"pypi\",\n    \"evidence\": \"requests==2.25.0 declared in requirements.txt\",\n    \"references\": [\n      \"https://nvd.nist.gov/vuln/detail/CVE-2023-32681\"\n    ]\n  }\n]",
+      "stderr": "",
+      "exit_code": 0,
+      "duration_seconds": 0.0,
+      "extra": {}
+    },
+    {
+      "plugin_name": "secrets",
+      "scan_type": "SECRETS",
+      "tool": "secrets",
+      "tool_version": null,
+      "raw_file_path": "/home/user/zoulou_scanner/out_demo_scoring/raw/secrets/secrets.json",
+      "stdout": "[\n  {\n    \"rule_id\": \"generic-api-key\",\n    \"description\": \"Generic API key pattern detected in a configuration template\",\n    \"file\": \"config/settings.example.yaml\",\n    \"line\": 31,\n    \"severity\": \"MEDIUM\",\n    \"confidence\": \"LOW\",\n    \"evidence\": \"api_key: \\\"sk_live_[REDACTED]\\\"\"\n  }\n]",
+      "stderr": "",
+      "exit_code": 0,
+      "duration_seconds": 0.0,
+      "extra": {}
+    },
+    {
+      "plugin_name": "container",
+      "scan_type": "CONTAINER",
+      "tool": "container",
+      "tool_version": null,
+      "raw_file_path": "/home/user/zoulou_scanner/out_demo_scoring/raw/container/container.json",
+      "stdout": "[\n  {\n    \"image\": \"myapp:2.4\",\n    \"package\": \"nginx\",\n    \"version\": \"1.24.0\",\n    \"cve\": \"CVE-2024-7347\",\n    \"severity\": \"HIGH\",\n    \"confidence\": \"HIGH\",\n    \"description\": \"nginx mp4 module out-of-bounds read: a crafted MP4 file can crash the worker process or disclose memory.\",\n    \"layer\": \"sha256:9f1e2c4b8a7d6503\",\n    \"evidence\": \"nginx 1.24.0 installed in layer sha256:9f1e2c4b8a7d6503\",\n    \"references\": [\n      \"https://nvd.nist.gov/vuln/detail/CVE-2024-7347\"\n    ]\n  },\n  {\n    \"image\": \"myapp:2.4\",\n    \"package\": \"cryptography\",\n    \"version\": \"41.0.3\",\n    \"cve\": \"CVE-2023-49083\",\n    \"severity\": \"MEDIUM\",\n    \"confidence\": \"HIGH\",\n    \"description\": \"NULL dereference when loading a PKCS7 certificate bundle.\",\n    \"layer\": \"sha256:9f1e2c4b8a7d6503\",\n    \"evidence\": \"cryptography 41.0.3 (site-packages) in layer sha256:9f1e2c4b8a7d6503\",\n    \"references\": [\n      \"https://nvd.nist.gov/vuln/detail/CVE-2023-49083\"\n    ]\n  }\n]",
+      "stderr": "",
+      "exit_code": 0,
+      "duration_seconds": 0.0,
+      "extra": {}
+    },
+    {
+      "plugin_name": "network",
+      "scan_type": "NETWORK",
+      "tool": "network",
+      "tool_version": null,
+      "raw_file_path": "/home/user/zoulou_scanner/out_demo_scoring/raw/network/nmap.xml",
+      "stdout": "[\n  {\n    \"host\": \"10.0.0.1\",\n    \"hostname\": \"app.internal\",\n    \"port\": 22,\n    \"protocol\": \"tcp\",\n    \"service\": \"ssh\",\n    \"product\": \"OpenSSH\",\n    \"product_version\": \"8.9p1\"\n  },\n  {\n    \"host\": \"10.0.0.1\",\n    \"hostname\": \"app.internal\",\n    \"port\": 80,\n    \"protocol\": \"tcp\",\n    \"service\": \"http\",\n    \"product\": \"nginx\",\n    \"product_version\": \"1.24.0\"\n  },\n  {\n    \"host\": \"10.0.0.1\",\n    \"hostname\": \"app.internal\",\n    \"port\": 443,\n    \"protocol\": \"tcp\",\n    \"service\": \"https\",\n    \"product\": \"nginx\",\n    \"product_version\": \"1.24.0\"\n  },\n  {\n    \"host\": \"10.0.0.2\",\n    \"hostname\": \"\",\n    \"port\": 3306,\n    \"protocol\": \"tcp\",\n    \"service\": \"mysql\",\n    \"product\": \"MySQL\",\n    \"product_version\": \"8.0.33\"\n  }\n]",
+      "stderr": "",
+      "exit_code": 0,
+      "duration_seconds": 0.001,
+      "extra": {
+        "mode": "parse-only",
+        "targets_in_allowlist": [
+          "10.0.0.1",
+          "10.0.0.2"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+# ============================================================================
+# Security Orchestrator – two-tier deployment
+# ============================================================================
+# Two images:
+#   * web            – UI + orchestrator brain (planning, LLM, reporting).
+#                      Holds NO scanners. Long-running service.
+#   * scanner-runner – ephemeral executor with all scanners installed. NOT run
+#                      as a service: the web container launches one per scan via
+#                      the Docker socket (`docker run security-orchestrator …`).
+#
+# Usage:
+#   # build BOTH images (the `runner` profile pulls in scanner-runner):
+#   docker compose --profile runner build
+#
+#   # start only the web/brain service:
+#   docker compose up -d
+#
+# ── Docker-out-of-docker path rules (IMPORTANT) ─────────────────────────────
+# The web container starts the runner on the *host* Docker daemon (via the
+# mounted socket). Any path the web container hands to `docker run -v` is
+# resolved by the HOST daemon, not inside the web container. Therefore the two
+# shared locations below are bind-mounted at the SAME absolute path on the host
+# and inside the web container:
+#   * SCANS_DIR    – run dirs (plan.json / artifacts.json / reports)
+#   * WORKSPACE_DIR – root holding the repos you want to scan; the brain reads
+#                     them for planning and the runner mounts them read-only.
+# Pick host paths that exist; override via a .env file or shell environment.
+# ============================================================================
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    image: security-orchestrator-web
+    container_name: security-orchestrator-web
+    ports:
+      - "5000:5000"
+    environment:
+      # Image name the web container spins up per scan (matches scanner-runner).
+      SCANNER_IMAGE: security-orchestrator
+      # Same absolute path on host and in-container (see path rules above).
+      SCANS_DIR: ${SCANS_DIR:-/data/scans}
+      # Root holding the repos to scan. It was only ever mounted as a volume,
+      # never exported, so the backend fell back to $HOME and could neither
+      # browse nor scan anything under it.
+      WORKSPACE_DIR: ${WORKSPACE_DIR:-/data/workspace}
+      # Local LLM endpoint (LM Studio on the host by default).
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:1234}
+      # Postgres connection (the `db` service below). Persists API keys, app
+      # login users, a report index, and key/value settings.
+      DATABASE_URL: postgresql://${POSTGRES_USER:-orchestrator}:${POSTGRES_PASSWORD:-orchestrator}@db:5432/${POSTGRES_DB:-orchestrator}
+      # Secret used to sign Express session cookies (login). Leave unset only for
+      # local runs: the backend then generates a random key per process, so
+      # sessions do not survive a restart. Required when NODE_ENV=production.
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-}
+      # DATABASE_URL is set above, so /api requires a login. These seed the first
+      # admin account, and only while the users table is empty. Change them.
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
+      # Public base URL used to build the GitHub OAuth2 redirect URI. Must match
+      # the OAuth App's "Authorization callback URL" (…/api/git/github/callback).
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:5000}
+      # GitHub OAuth App credentials. Unset → "Connect GitHub account" disabled.
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+    volumes:
+      # Docker socket so the web app can launch runner containers.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Shared scans dir – identical path host & container (DooD requirement).
+      - ${SCANS_DIR:-/data/scans}:${SCANS_DIR:-/data/scans}
+      # Workspace root with repos to scan – identical path, read-only.
+      - ${WORKSPACE_DIR:-/data/workspace}:${WORKSPACE_DIR:-/data/workspace}:ro
+    extra_hosts:
+      # Lets host.docker.internal resolve on Linux (no-op on Docker Desktop).
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── Persistence database ────────────────────────────────────────────────
+  # Simple Postgres instance backing the UI's persistence endpoints
+  # (API keys, app login users, report index, settings). Data survives
+  # restarts via the named `db-data` volume. The port is published so a future
+  # standalone Node/React backend can connect from the host during dev.
+  db:
+    image: postgres:16-alpine
+    container_name: security-orchestrator-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-orchestrator}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-orchestrator}
+      POSTGRES_DB: ${POSTGRES_DB:-orchestrator}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-orchestrator} -d ${POSTGRES_DB:-orchestrator}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Built (not run) as a service. The `runner` profile keeps it out of
+  # `docker compose up` while still letting `--profile runner build` build it.
+  scanner-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: security-orchestrator
+    profiles: ["runner"]
+    # Self-documenting default; real invocations come from the web container.
+    command: ["python", "-m", "orchestrator.main", "run-plan", "--help"]
+
+# ── Named volumes ───────────────────────────────────────────────────────────
+volumes:
+  # Postgres data directory – keeps API keys / users / reports across restarts.
+  db-data:
